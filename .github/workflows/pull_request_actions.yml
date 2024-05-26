@@ -77,7 +77,7 @@ jobs:
     runs-on:  ubuntu-24.04
     defaults:
       run:
-      working-directory: ${{ env.TERRAFORM_WORKING_DIR }}
+        working-directory: ${{ env.TERRAFORM_WORKING_DIR }}
 
     steps:
       - name: "Checkout"
