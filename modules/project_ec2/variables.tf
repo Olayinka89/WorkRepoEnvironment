@@ -36,6 +36,10 @@ variable "http_port" {
 variable "vpc_security_group_ids" {
   description = "The security group vpc "
   default     = true
+}
 
-
+variable "security_groups" {
+  description = "The seciruty group"
+  type = string
+  default = "sg-0ee6542d49b888437"
 }
