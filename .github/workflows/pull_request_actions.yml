@@ -37,7 +37,7 @@ jobs:
         enable_comments: true
 
     - name: Display KICS results
-      run: 
+      run: |
         cat myResults/results.json
      
 
