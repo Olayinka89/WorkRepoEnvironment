@@ -28,7 +28,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         output_path: myResults/
         ignore_on_exit: results
-        enable_comments:${{ inputs.ENABLE_COMMENTS }}
+        enable_comments: ${{ inputs.ENABLE_COMMENTS }}
 
     - name: Display KICS results
       run: |
