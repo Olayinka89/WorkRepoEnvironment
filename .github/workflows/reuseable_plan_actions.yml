@@ -26,7 +26,7 @@ on:
 jobs:
   plan:
     name: "Terragrunt Init, Validate and Plan"
-    nvironment: ${{ inputs.ENVIRONMENT_NAME }}
+    #environment: ${{ inputs.ENVIRONMENT_NAME }}
     if: github.event_name == 'pull_request'
     runs-on:  ubuntu-24.04
     defaults:
