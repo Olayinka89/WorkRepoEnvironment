@@ -1,9 +1,9 @@
 name: Terraform Plan and Apply
 on: 
   workflow_dispatch:
-  push:
-    branches:
-      - main 
+  #push:
+    #branches:
+      #- main 
       #- test - This is to shows that multiple branches can be targeted for a spwcific triger
   pull_request:
     branches:
@@ -45,7 +45,7 @@ jobs:
     name:  terraform init, validate, plan
     uses:  ./.github/workflows/reuseable_plan_actions.yml
     with:
-      ENVIRONMENT_NAME: 'prod'
+      #ENVIRONMENT_NAME: 'prod'
       TERRAFORM_WORKING_DIR: ./applied/prod
       TERRAFORM_VERSION: '1.7.2'
       TERRAGRUNT_VERSION: '0.56.0'
@@ -57,7 +57,7 @@ jobs:
     needs: [run_plan_in_prod_environment]
     uses: ./.github/workflows/reuseable_apply_actions.yml
     with:
-      ENVIRONMENT_NAME: 'prod'
+      #ENVIRONMENT_NAME: 'prod'
       TERRAFORM_WORKING_DIR: ./applied/prod
       TERRAFORM_VERSION: '1.7.2'
       TERRAGRUNT_VERSION: '0.56.0'
@@ -68,7 +68,7 @@ jobs:
     name:  terraform init, validate, plan
     uses:  ./.github/workflows/reuseable_plan_actions.yml
     with:
-      ENVIRONMENT_NAME: 'dev'
+      #ENVIRONMENT_NAME: 'dev'
       TERRAFORM_WORKING_DIR: ./applied/dev
       TERRAFORM_VERSION: '1.7.2'
       TERRAGRUNT_VERSION: '0.58.0'
@@ -80,7 +80,7 @@ jobs:
     needs: [run_plan_in_prod_environment]
     uses: ./.github/workflows/reuseable_apply_actions.yml
     with:
-      ENVIRONMENT_NAME: 'prod'
+      #ENVIRONMENT_NAME: 'prod'
       TERRAFORM_WORKING_DIR: ./applied/dev
       TERRAFORM_VERSION: '1.7.2'
       TERRAGRUNT_VERSION: '0.58.0'

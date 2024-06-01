@@ -18,10 +18,10 @@ on:
       AWS_REGION:
         required:  true
         type:  string
-      ENVIRONMENT_NAME:
-        description: "The environment to use in running workflow"
-        required: true
-        type: string
+      #ENVIRONMENT_NAME:
+        #description: "The environment to use in running workflow"
+        #required: true
+        #type: string
 
 jobs:
   plan:
