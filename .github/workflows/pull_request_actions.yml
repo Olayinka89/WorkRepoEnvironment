@@ -20,12 +20,12 @@ concurrency: my devsecops #This will ensure that only a single workflow is run a
 jobs:
   run_plan_in_dev_environment:
     name:  terraform init, validate, plan
-    uses:  ./github/workflows/reuseable_plan_actions.yml
+    uses:  ././github/workflows/reuseable_plan_actions.yml
     with:
       ENVIRONMENT_NAME: 'dev'
       TERRAFORM_WORKING_DIR: ./applied/dev
       TERRAFORM_VERSION: '1.7.2'
-      TERRAGRUNT_VERSION: '0.56.0'
+      TERRAGRUNT_VERSION: '0.58.0'
       AWS_REGION: 'us-east-1'
     secrets: inherit
 
