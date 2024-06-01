@@ -43,7 +43,7 @@ jobs:
 
   run_plan_in_prod_environment:
     name:  terraform init, validate, plan
-    uses:  ./github/workflows/reuseable_plan_actions.yml
+    uses:  ./.github/workflows/reuseable_plan_actions.yml
     with:
       ENVIRONMENT_NAME: 'prod'
       TERRAFORM_WORKING_DIR: ./applied/prod
