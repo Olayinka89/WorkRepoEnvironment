@@ -40,9 +40,9 @@ jobs:
       run: |
         cat myResults/results.json
      
-
   run_plan_in_prod_environment:
     name:  terraform init, validate, plan
+    needs:  [kics]
     uses:  ./.github/workflows/reuseable_plan_actions.yml
     with:
       #ENVIRONMENT_NAME: 'prod'
