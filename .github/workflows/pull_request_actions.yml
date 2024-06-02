@@ -23,8 +23,8 @@ jobs:
     uses: ./.github/workflows/terraform_kics.yml
     with:
       ENABLE_COMMENTS: true
-      WORKING_DIRECTORY:  'infrastructure/region/iam_group'
-  
+      WORKING_DIRECTORY: 'infrastructure/region/iam_group'
+     
   run_plan_in_prod_environment:
     name:  terraform init, validate, plan
     needs:  [kics]
