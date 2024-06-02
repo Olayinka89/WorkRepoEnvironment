@@ -18,15 +18,15 @@ on:
       AWS_REGION:
         required:  true
         type:  string
-      ENVIRONMENT_NAME:
-        description: "The environment to use in running workflow"
-        required: true
-        type: string
+      #ENVIRONMENT_NAME:
+        #description: "The environment to use in running workflow"
+        #required: true
+        #type: string
 
 jobs:
  apply:
     name:  "Terragrunt Apply"
-    environment: ${{ inputs.ENVIRONMENT_NAME }}
+    #environment: ${{ inputs.ENVIRONMENT_NAME }}
     if:  github.event_name == 'push'
     runs-on:  ubuntu-24.04
     defaults:

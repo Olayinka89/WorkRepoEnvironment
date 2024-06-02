@@ -1,9 +1,9 @@
 name: Terraform Plan and Apply
 on: 
   workflow_dispatch:
-  push:
-    branches:
-      - main 
+  #push:
+    #branches:
+      #- main 
       #- test - This is to shows that multiple branches can be targeted for a spwcific triger
   pull_request:
     branches:
@@ -19,33 +19,18 @@ concurrency: my devsecops #This will ensure that only a single workflow is run a
 
 jobs:
   kics:
-    name: Run KICS Code Analysis
-    runs-on: ubuntu-24.04
-    steps:
-    - name: checkout
-      uses: actions/checkout@v3
-      with:
-        ref: ${{github.event.pull_request.head.ref}}
-
-    - name: Run KICS Scan
-      uses: checkmarx/kics-github-action@v2.0.0
-      with:
-        path:  ./infrastructure/region/iam_group
-        token: ${{ secrets.GITHUB_TOKEN }}
-        output_path: myResults/
-        ignore_on_exit: results
-        enable_comments: true
-
-    - name: Display KICS results
-      run: |
-        cat myResults/results.json
+    name: 'Run KICS scan'
+    uses: ./.github/workflows/terraform_kics.yml
+    with:
+      ENABLE_COMMENTS: true
+      WORKING_DIRECTORY: 'infrastructure/region/iam_group'
      
-
   run_plan_in_prod_environment:
     name:  terraform init, validate, plan
+    needs:  [kics]
     uses:  ./.github/workflows/reuseable_plan_actions.yml
     with:
-      ENVIRONMENT_NAME: 'prod'
+      #ENVIRONMENT_NAME: 'prod'
       TERRAFORM_WORKING_DIR: ./applied/prod
       TERRAFORM_VERSION: '1.7.2'
       TERRAGRUNT_VERSION: '0.56.0'
@@ -57,7 +42,7 @@ jobs:
     needs: [run_plan_in_prod_environment]
     uses: ./.github/workflows/reuseable_apply_actions.yml
     with:
-      ENVIRONMENT_NAME: 'prod'
+      #ENVIRONMENT_NAME: 'prod'
       TERRAFORM_WORKING_DIR: ./applied/prod
       TERRAFORM_VERSION: '1.7.2'
       TERRAGRUNT_VERSION: '0.56.0'
@@ -68,7 +53,7 @@ jobs:
     name:  terraform init, validate, plan
     uses:  ./.github/workflows/reuseable_plan_actions.yml
     with:
-      ENVIRONMENT_NAME: 'dev'
+      #ENVIRONMENT_NAME: 'dev'
       TERRAFORM_WORKING_DIR: ./applied/dev
       TERRAFORM_VERSION: '1.7.2'
       TERRAGRUNT_VERSION: '0.58.0'
@@ -80,10 +65,10 @@ jobs:
     needs: [run_plan_in_prod_environment]
     uses: ./.github/workflows/reuseable_apply_actions.yml
     with:
-      ENVIRONMENT_NAME: 'prod'
+      #ENVIRONMENT_NAME: 'prod'
       TERRAFORM_WORKING_DIR: ./applied/dev
       TERRAFORM_VERSION: '1.7.2'
-      TERRAGRUNT_VERSION: '0.56.0'
+      TERRAGRUNT_VERSION: '0.58.0'
       AWS_REGION: 'us-east-1'
     secrets: inherit
 
